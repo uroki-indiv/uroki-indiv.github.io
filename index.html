@@ -3,52 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uroki-Indiv | Обучение Python и Автоматизация</title>
+    <title>Uroki-Indiv | Индивидуальные уроки программирования</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background: #f4f7f6; }
-        header { text-align: center; padding: 40px 0; background: #fff; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .section { background: #fff; padding: 25px; margin-top: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        .price-list { list-style: none; padding: 0; }
-        .price-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #ddd; }
-        .footer { text-align: center; font-size: 0.8em; color: #7f8c8d; margin-top: 40px; padding: 20px; }
-        .btn { display: inline-block; background: #3498db; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 15px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background: #fafafa; }
+        header { text-align: center; padding: 50px 20px; background: #fff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .nav { text-align: center; margin: 20px 0; }
+        .nav a { margin: 0 15px; text-decoration: none; color: #3498db; font-weight: bold; }
+        .section { background: #fff; padding: 30px; margin-top: 20px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        h1 { color: #2c3e50; font-size: 2.2em; margin-bottom: 10px; }
+        h2 { color: #2c3e50; border-left: 4px solid #3498db; padding-left: 15px; }
+        .price-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .price-table td { padding: 12px; border-bottom: 1px solid #eee; }
+        .price-table td:last-child { text-align: right; font-weight: bold; color: #2c3e50; }
+        .cta-button { display: inline-block; background: #3498db; color: #fff; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px; transition: background 0.3s; }
+        .cta-button:hover { background: #2980b9; }
+        footer { text-align: center; margin-top: 50px; padding: 20px; color: #7f8c8d; font-size: 0.9em; border-top: 1px solid #eee; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Индивидуальное обучение Python</h1>
-    <p>Автоматизация процессов, работа с данными, создание Telegram-ботов</p>
-    <a href="https://t.me/ВАШ_НИК" class="btn">Записаться на урок</a>
+    <h1>Индивидуальные уроки программирования</h1>
+    <p>Python, автоматизация бизнес-задач и разработка инструментов для анализа данных</p>
+    <div class="nav">
+        <a href="index.html">Главная</a>
+        <a href="oferta.html">Публичная оферта</a>
+    </div>
+    <a href="https://t.me/ВАШ_НИК" class="cta-button">Связаться в Telegram</a>
 </header>
 
 <div class="section">
-    <h2>Услуги и стоимость</h2>
-    <ul class="price-list">
-        <li class="price-item"><span>Вводное занятие (диагностика)</span> <span>Бесплатно</span></li>
-        <li class="price-item"><span>Индивидуальный урок (60 мин)</span> <span>2 500 ₽</span></li>
-        <li class="price-item"><span>Курс "Автоматизация для бизнеса" (5 уроков)</span> <span>10 000 ₽</span></li>
+    <h2>О занятиях</h2>
+    <p>Я помогаю освоить программирование на языке Python для решения реальных задач: от автоматизации рутины и обработки таблиц до создания сложных Telegram-ботов и аналитических дашбордов.</p>
+    <ul>
+        <li>Индивидуальный подход к каждому ученику.</li>
+        <li>Разбор конкретных кейсов и рабочих задач.</li>
+        <li>Гибкий график занятий.</li>
     </ul>
 </div>
 
 <div class="section">
-    <h2>Условия оказания услуг</h2>
-    <p>Уроки проходят дистанционно (Zoom/Google Meet). Время фиксируется по предварительной записи. Оплата производится в форме 100% предоплаты через прямой перевод (СБП).</p>
+    <h2>Стоимость</h2>
+    <table class="price-table">
+        <tr>
+            <td>Разовая консультация / Урок (60 мин)</td>
+            <td>2 500 ₽</td>
+        </tr>
+        <tr>
+            <td>Пакет из 5 занятий</td>
+            <td>11 000 ₽</td>
+        </tr>
+        <tr>
+            <td>Разработка архитектуры проекта (консультация)</td>
+            <td>По запросу</td>
+        </tr>
+    </table>
+    <p><small>* Оплата производится после каждого занятия. Факт оплаты подтверждает отсутствие претензий к качеству услуг.</small></p>
 </div>
 
-<div class="section">
-    <h2>Правила возврата</h2>
-    <p>При отмене занятия более чем за 24 часа до начала — полный возврат средств. При отмене менее чем за 24 часа — удерживается 20% стоимости занятия за бронирование времени. Если услуга уже оказана, возврат не предусмотрен.</p>
-</div>
-
-<div class="footer">
-    <p><strong>Реквизиты:</strong><br>
-    ИП [ВАШЕ ФИО]<br>
-    ИНН: [ВАШ ИНН]<br>
-    Контакт для связи: [ВАШ EMAIL ИЛИ ТЕЛЕФОН]</p>
-    <p>&copy; 2026 Uroki-Indiv. Все права защищены.</p>
-</div>
+<footer>
+    <p>ИП [ВАШЕ ФИО] | ИНН [ВАШ ИНН]<br>
+    &copy; 2026 Uroki-Indiv. Работа по <a href="oferta.html">публичной оферте</a>.</p>
+</footer>
 
 </body>
 </html>
