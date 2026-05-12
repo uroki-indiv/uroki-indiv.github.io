@@ -2,50 +2,83 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Индивидуальные занятия по программированию | ИП Яковенко Н.Ю.</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-color: #05070a;
-            --card-bg: #0f172a;
-            --accent-color: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.15);
+            --bg: #020203;
+            --accent: #38bdf8;
             --text-main: #94a3b8;
             --text-bright: #f8fafc;
-            --border-color: #1e293b;
-            --gradient-primary: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            --card-bg: rgba(15, 23, 42, 0.7);
+            --border: rgba(56, 189, 248, 0.2);
+            --accent-glow: rgba(56, 189, 248, 0.15);
         }
 
-        * { box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
             color: var(--text-main);
-            margin: 0;
-            line-height: 1.6;
             overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ФОН С ИЗОБРАЖЕНИЕМ */
+        .bg-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* Комбинируем затемнение и вашу картинку */
+            background: 
+                radial-gradient(circle at center, rgba(2, 2, 3, 0.2) 0%, var(--bg) 100%),
+                url('bg-tech.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
+            opacity: 0.6;
+            animation: backgroundPulse 30s ease-in-out infinite alternate;
+        }
+
+        /* Тонкая сетка поверх для технологичного вида */
+        .bg-grid::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 100px 100px;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+            opacity: 0.1;
+        }
+
+        @keyframes backgroundPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        /* Header & Navigation */
         header {
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-color);
-            background: rgba(5, 7, 10, 0.8);
-            backdrop-filter: blur(12px);
+            padding: 25px 0;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             position: sticky;
             top: 0;
             z-index: 100;
+            background: rgba(2, 2, 3, 0.8);
         }
 
         .nav-content {
@@ -55,253 +88,290 @@
         }
 
         .brand {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
-            font-size: 1.2em;
+            font-size: 1.3rem;
             color: var(--text-bright);
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
         }
 
-        .brand span { color: var(--accent-color); }
+        .brand span { color: var(--accent); }
 
-        .ip-info {
-            font-size: 0.8em;
-            color: var(--text-main);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Hero Section */
+        /* Hero */
         .hero {
-            padding: 100px 0 60px;
+            height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            background: radial-gradient(circle at top right, #1e293b 0%, var(--bg-color) 60%);
+            position: relative;
         }
 
         h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(2.5em, 5vw, 4em);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 800;
-            line-height: 1.1;
             color: var(--text-bright);
-            margin: 0 0 24px;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .hero-desc {
-            font-size: 1.25em;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            color: #64748b;
+        .hero p {
+            max-width: 700px;
+            font-size: 1.4rem;
+            color: #94a3b8;
+        }
+
+        /* Анимация прокрутки */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.6;
+        }
+
+        .mouse {
+            width: 26px;
+            height: 42px;
+            border: 2px solid var(--text-bright);
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .wheel {
+            width: 4px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll-anim 1.5s infinite;
+        }
+
+        @keyframes scroll-anim {
+            0% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, 15px); }
         }
 
         /* Features */
-        .features {
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+            margin: 100px 0;
+        }
+
+        .feature-item {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin: 60px 0;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+            min-height: 400px;
         }
 
-        .feature-card {
+        .feature-item:nth-child(even) { direction: rtl; }
+        .feature-item:nth-child(even) .feature-text { direction: ltr; }
+
+        .feature-image {
+            width: 100%;
+            height: 400px;
             background: var(--card-bg);
-            padding: 32px;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            position: relative;
+            border: 1px solid var(--border);
+            border-radius: 20px;
             overflow: hidden;
+            display: flex;
+            backdrop-filter: blur(5px);
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--gradient-primary);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 0;
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-color);
-            box-shadow: 0 10px 30px -10px var(--accent-glow);
-        }
+        .feature-item:hover .feature-image img { transform: scale(1.05); }
 
-        .feature-card * { position: relative; z-index: 1; }
-
-        .feature-card .icon {
-            font-size: 2em;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .feature-card h3 {
+        .feature-text h3 {
+            font-size: 2.5rem;
             color: var(--text-bright);
-            margin: 0 0 12px;
-            font-size: 1.4em;
+            margin-bottom: 20px;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* Pricing Section */
-        .pricing {
-            margin: 80px 0;
-            padding: 60px;
-            background: linear-gradient(180deg, #0f172a 0%, #05070a 100%);
-            border-radius: 24px;
-            border: 1px solid var(--border-color);
+        .feature-text p {
+            font-size: 1.3rem;
+            color: #cbd5e1; /* Более светлый серый для лучшей читаемости */
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* Pricing */
+        .pricing-v2 {
+            margin: 150px 0;
+            padding: 80px;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, rgba(2, 2, 3, 0.9) 100%);
+            border: 1px solid var(--border);
+            border-radius: 40px;
             text-align: center;
-            position: relative;
-        }
-
-        .pricing::after {
-            content: '';
-            position: absolute;
-            top: -2px; left: 20%; right: 20%; height: 2px;
-            background: var(--gradient-primary);
-            filter: blur(5px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
         }
 
         .price-title {
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            text-transform: uppercase; 
+            letter-spacing: 5px; 
+            color: var(--accent);
             font-weight: 600;
-            font-size: 0.9em;
-            color: var(--accent-color);
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
-        .price-value {
-            font-family: 'Outfit', sans-serif;
-            font-size: 3em;
-            font-weight: 700;
+        .price-val {
+            font-size: 4rem;
+            font-weight: 800;
             color: var(--text-bright);
-            margin-bottom: 24px;
+            margin: 20px 0;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .price-desc {
-            max-width: 500px;
-            margin: 0 auto 32px;
-            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #94a3b8;
         }
 
-        .btn {
-            padding: 14px 28px;
-            border-radius: 10px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            font-size: 0.95em;
+        .btn-modern {
             display: inline-block;
-        }
-
-        .btn-secondary {
+            padding: 20px 50px;
             background: transparent;
-            border: 1px solid var(--border-color);
             color: var(--text-bright);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: 0.4s;
         }
 
-        .btn-secondary:hover {
-            border-color: var(--accent-color);
+        .btn-modern:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
             background: rgba(56, 189, 248, 0.05);
         }
 
-        /* Footer */
         footer {
-            padding: 80px 0 40px;
-            border-top: 1px solid var(--border-color);
             text-align: center;
-            font-size: 0.85em;
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--border);
+            background: rgba(2, 2, 3, 0.9);
+            backdrop-filter: blur(10px);
         }
 
         .footer-legal {
-            margin-top: 24px;
             color: #475569;
             font-style: italic;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 700px;
+            margin: 20px auto;
+            font-size: 0.85rem;
         }
 
-        .footer-links {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .footer-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover { color: var(--accent-color); }
-
-        @media (max-width: 640px) {
-            h1 { font-size: 2.5em; }
-            .pricing { padding: 40px 20px; }
-            .nav-content { flex-direction: column; gap: 10px; }
+        @media (max-width: 768px) {
+            .feature-item { grid-template-columns: 1fr; text-align: center; }
+            .feature-item:nth-child(even) { direction: ltr; }
+            .feature-image { height: 300px; }
+            .hero { height: auto; padding: 100px 0; }
+            .scroll-indicator { display: none; }
+            h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
+<div class="bg-grid"></div>
+
 <header>
-    <div class="container">
-        <div class="nav-content">
-            <div class="brand">UROKI<span>INDIV</span></div>
-            <div class="ip-info">ИП Яковенко Николай Юрьевич</div>
-        </div>
+    <div class="container nav-content">
+        <div class="brand">UROKI<span>INDIV</span></div>
+        <div style="font-size: 0.8rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px;">ИП Яковенко Николай Юрьевич</div>
     </div>
 </header>
 
 <main class="container">
-    <section class="hero">
+    <section class="hero" data-aos="fade-up">
         <h1>Индивидуальное обучение проектированию и разработке ПО</h1>
-        <p class="hero-desc">Персональное наставничество для тех, кто хочет не просто писать код, а создавать качественные программные продукты.</p>
-    </section>
-
-    <section class="features">
-        <div class="feature-card">
-            <span class="icon">🏗️</span>
-            <h3>Архитектура</h3>
-            <p>Учимся выстраивать логические блоки и проектировать масштабируемые системы с нуля.</p>
-        </div>
-        <div class="feature-card">
-            <span class="icon">💎</span>
-            <h3>Clean Code</h3>
-            <p>Осваиваем принципы написания кода, который легко читать, тестировать и поддерживать.</p>
-        </div>
-        <div class="feature-card">
-            <span class="icon">🧬</span>
-            <h3>Алгоритмы</h3>
-            <p>Понимаем структуры данных и алгоритмическую логику для решения сложных задач.</p>
-        </div>
-        <div class="feature-card">
-            <span class="icon">🔍</span>
-            <h3>Code Review</h3>
-            <p>Учимся критически оценивать код, проводить рефакторинг и находить узкие места.</p>
-        </div>
-        <div class="feature-card">
-            <span class="icon">🎯</span>
-            <h3>Практика</h3>
-            <p>Разбираем реальные задачи из индустрии и работаем над вашими личными проектами.</p>
-        </div>
-        <div class="feature-card">
-            <span class="icon">🛠️</span>
-            <h3>Инструменты</h3>
-            <p>Методологии разработки, Git и другие стандарты профессиональной командной работы.</p>
+        <p>Персональное наставничество для тех, кто хочет не просто писать код, а создавать качественные программные продукты.</p>
+        
+        <div class="scroll-indicator">
+            <div class="mouse"><div class="wheel"></div></div>
+            <span style="font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;">Листайте вниз</span>
         </div>
     </section>
 
-    <section class="pricing">
+    <div class="features-list">
+        <div class="feature-item" data-aos="fade-right">
+            <div class="feature-image"><img src="1.jpg" alt="Архитектура"></div>
+            <div class="feature-text">
+                <h3>Архитектура</h3>
+                <p>Учимся выстраивать логические блоки и проектировать масштабируемые системы с нуля.</p>
+            </div>
+        </div>
+
+        <div class="feature-item" data-aos="fade-left">
+            <div class="feature-image"><img src="3.jpg" alt="Clean Code"></div>
+            <div class="feature-text">
+                <h3>Clean Code</h3>
+                <p>Осваиваем принципы написания кода, который легко читать, тестировать и поддерживать.</p>
+            </div>
+        </div>
+
+        <div class="feature-item" data-aos="fade-right">
+            <div class="feature-image"><img src="5.jpg" alt="Алгоритмы"></div>
+            <div class="feature-text">
+                <h3>Алгоритмы</h3>
+                <p>Понимаем структуры данных и алгоритмическую логику для решения сложных задач.</p>
+            </div>
+        </div>
+
+        <div class="feature-item" data-aos="fade-left">
+            <div class="feature-image"><img src="2.jpg" alt="Code Review"></div>
+            <div class="feature-text">
+                <h3>Code Review</h3>
+                <p>Учимся критически оценивать код, проводить рефакторинг и находить узкие места.</p>
+            </div>
+        </div>
+
+        <div class="feature-item" data-aos="fade-right">
+            <div class="feature-image"><img src="4.jpg" alt="Практика"></div>
+            <div class="feature-text">
+                <h3>Практика</h3>
+                <p>Разбираем реальные задачи из индустрии и работаем над вашими личными проектами.</p>
+            </div>
+        </div>
+
+        <div class="feature-item" data-aos="fade-left">
+            <div class="feature-image"><img src="6.jpg" alt="Инструменты"></div>
+            <div class="feature-text">
+                <h3>Инструменты</h3>
+                <p>Методологии разработки, Git и другие стандарты профессиональной командной работы.</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="pricing-v2" data-aos="zoom-in">
         <div class="price-title">Стоимость обучения</div>
-        <div class="price-value"></div>
-        <p class="price-desc">Стоимость обучения согласовывается предварительно и индивидуально, исходя из сложности задач, интенсивности графика и ваших образовательных целей. <br><br>Стандартная ставка — 10 000 ₽ / час.</p>
-        <a href="oferta.html" class="btn btn-secondary">Публичная оферта</a>
+        <p class="price-desc">Стоимость обучения согласовывается предварительно и индивидуально, исходя из сложности задач, интенсивности графика и ваших образовательных целей.</p>
+        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+            <a href="shema.html" class="btn-modern">Пример схемы уроков</a>
+            <a href="oferta.html" class="btn-modern">Публичная оферта</a>
+        </div>
     </section>
 </main>
 
@@ -309,13 +379,18 @@
     <div class="container">
         <p><strong>ИП ЯКОВЕНКО НИКОЛАЙ ЮРЬЕВИЧ</strong> | ИНН 390400678188</p>
         <p class="footer-legal">Данный сайт не осуществляет сбор, автоматизированную обработку и хранение персональных данных пользователей в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
-        <div class="footer-links">
-            <a href="oferta.html">Оферта</a>
-            <a href="privacy.html">Конфиденциальность</a>
+        <div style="margin-top: 20px;">
+            <a href="oferta.html" style="color: var(--text-main); text-decoration: none; margin: 0 15px;">Оферта</a>
+            <a href="privacy.html" style="color: var(--text-main); text-decoration: none; margin: 0 15px;">Конфиденциальность</a>
         </div>
-        <p style="margin-top: 30px; opacity: 0.5;">&copy; 2026 Uroki-Indiv. Все права защищены.</p>
+        <p style="margin-top: 30px; opacity: 0.3; font-size: 0.8rem;">&copy; 2026 Uroki-Indiv. Все права защищены.</p>
     </div>
 </footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: false, offset: 200 });
+</script>
 
 </body>
 </html>
